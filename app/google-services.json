@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "829635508465",
+    "firebase_url": "https://familylocatorapp-94fa6.firebaseio.com",
+    "project_id": "familylocatorapp-94fa6",
+    "storage_bucket": "familylocatorapp-94fa6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829635508465:android:7cfb140986f6e436",
+        "android_client_info": {
+          "package_name": "com.example.suraj.familylocatorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829635508465-ve6mjt66gj1lqtu7nakrseosbkq5vpmb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.suraj.familylocatorapp",
+            "certificate_hash": "397613575111e75b96959cd49754318b2ccdbcc2"
+          }
+        },
+        {
+          "client_id": "829635508465-udsdgq8sd0b6c1oer905qq08bgpbeaoi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIlK_mqsSSYICRu-qnrQv_9DBUbvNebEI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829635508465-udsdgq8sd0b6c1oer905qq08bgpbeaoi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
