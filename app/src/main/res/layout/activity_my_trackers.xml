@@ -16,6 +16,5 @@
         android:divider="@color/whitebackground"
         android:dividerHeight="1dp"
         />
-</LinearLayout>
 
 </RelativeLayout>
