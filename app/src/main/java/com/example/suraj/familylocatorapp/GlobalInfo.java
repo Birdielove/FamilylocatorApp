@@ -1,5 +1,9 @@
 package com.example.suraj.familylocatorapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -20,14 +24,11 @@ public class GlobalInfo {
     public static void UpdateInfo(String UserPhone)
     {
 
-
-
-
         DateFormat df = new SimpleDateFormat("yyyy/dd HH:MM:ss");
         Date date = new Date();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("Users").child(PhoneNumber).child("Updates").setValue(df.format(date).toString());
-
+        mDatabase.child("Users").child(UserPhone).
+                child("Updates").setValue(df.format(date).toString());
     }
 
     public static String FormatPhoneNumber(String Oldnmber){
@@ -42,6 +43,59 @@ public class GlobalInfo {
             return(" ");
         }
     }
+
+
+    //Global file
+    Context context;
+    SharedPreferences ShredRef;
+    public  GlobalInfo(Context context){
+        this.context=context;
+        ShredRef=context.getSharedPreferences("myRef",Context.MODE_PRIVATE);
+    }
+
+    void SaveData(){
+        String MyTrackersList="" ;
+        for (Map.Entry  m:GlobalInfo.MyTrackers.entrySet()){
+            if (MyTrackersList.length()==0)
+                MyTrackersList=m.getKey() + "%" + m.getValue();
+            else
+                MyTrackersList =MyTrackersList+ "%" + m.getKey() + "%" + m.getValue();
+
+        }
+
+        if (MyTrackersList.length()==0)
+            MyTrackersList="empty";
+
+
+        SharedPreferences.Editor editor=ShredRef.edit();
+        editor.putString("MyTrackers",MyTrackersList);
+        editor.putString("PhoneNumber",PhoneNumber);
+        editor.commit();
+    }
+
+    void LoadData(){
+        MyTrackers.clear();
+        PhoneNumber = ShredRef.getString("PhoneNumber","empty");
+        String MyTrackersList= ShredRef.getString("MyTrackers","empty");
+        if (!MyTrackersList.equals("empty")){
+            String[] users=MyTrackersList.split("%");
+            for (int i=0;i<users.length;i=i+2){
+                MyTrackers.put(users[i],users[i+1]);
+            }
+        }
+
+
+        if (PhoneNumber.equals("empty")){
+            // we can't startActivity in normal class we need to use context in normal java class
+
+            Intent intent=new Intent(context, Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+
+    }
+
+
 
 
 }

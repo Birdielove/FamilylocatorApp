@@ -49,11 +49,15 @@ public class MyTrackers extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 GlobalInfo.MyTrackers.remove(listnewsData.get(position).PhoneNumber);
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("Users").child(listnewsData.get(position).PhoneNumber).child("Finder").child(GlobalInfo.PhoneNumber).removeValue();
+                mDatabase.child("Users").child(listnewsData.get(position).PhoneNumber).
+                        child("Finder").child(GlobalInfo.PhoneNumber).removeValue();
+                GlobalInfo globalInfo = new GlobalInfo(getApplicationContext());
+                globalInfo.SaveData();
                 Referesh();
             }
         });
     }
+
     void Referesh()
     {
         listnewsData.clear();
@@ -77,6 +81,8 @@ public class MyTrackers extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.goback:
+                GlobalInfo globalInfo = new GlobalInfo(this);
+                globalInfo.SaveData();
                 finish();
                 return true;
 
@@ -163,6 +169,9 @@ public class MyTrackers extends AppCompatActivity {
                         GlobalInfo.MyTrackers.put(cNumber,name);
                         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                         mDatabase.child("Users").child(cNumber).child("Finders").child(GlobalInfo.PhoneNumber).setValue(true);
+                        GlobalInfo globalInfo = new GlobalInfo(this);
+                        globalInfo.SaveData();
+
 
                         Referesh();
 
